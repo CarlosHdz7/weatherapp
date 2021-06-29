@@ -5,23 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> 
     <title>Weather app</title>
 </head>
 <body>
 
     <div class="container">
 
-        <!-- SEARCH BAR -->
-        <nav class="navbar">
-            <input type="text" class="navbar__search" id="txtSearch"> <button type="button" id="btnSearch">Buscar</button>
-        </nav>
-    
-        <!-- MAIN SECTION -->
-        <div class="main-section">
-            <p id="lblCity">City</p>
-            <p id="lblTemperature">Tempeture</p>
-            <img src="" alt="" width="100" height="100" id="imgForecast">
-            <p id="lblForecast">Time</p> 
+        <div class="main-container">
+            <!-- SEARCH BAR -->
+            <nav class="navbar">
+                <input type="text" class="navbar__search" id="txtSearch"> <button type="button" id="btnSearch">Buscar</button>
+            </nav>
+        
+            <!-- MAIN SECTION -->
+            <div class="main-section">
+                <p id="lblCity" class="main-section__city">City</p>
+                <div class="main-section__img-container">
+                    <img src="" alt="img-forecast"  id="imgForecast" class="img-container__img">
+                    <p id="lblTemperature" class="img-container__temperature">Tempeture</p>
+                </div>
+                <p id="lblForecast" class="main-section__forecast">Time</p> 
+            </div>
         </div>
 
         <!-- TIME SECTION -->
@@ -30,11 +37,12 @@
         </div>
     
         <!-- DAYS SECTION -->
-        <div class="days-section">
-            <div class="days-section__card"></div>
-            <div class="days-section__card"></div>
-            <div class="days-section__card"></div>
-            <div class="days-section__card"></div>
+        <div class="days-section" id="daysSection">
+            <!-- <div class="days-section__card shadow">
+                <p>day</p>
+                <img src="https://www.metaweather.com/static/img/weather/t.svg" class="mini-img" alt="">
+                <p>Temp</p>
+            </div> -->
         </div>
     </div>
 
