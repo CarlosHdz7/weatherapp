@@ -18,8 +18,8 @@
         <nav class="navbar">
             <div class="items-container">
                 <input type="text" class="navbar__search" id="txtSearch" placeholder="Search Location">
-                <u class="items-found shadow d-none">
-                    <li class="item">
+                <u class="items-found shadow d-none" id="itemsFoundContainer">
+                    <!-- <li class="item">
                         <span class="item-inner">San Francisco</span>
                     </li>
                     <li class="item">
@@ -27,7 +27,7 @@
                     </li>
                     <li class="item">
                         <span class="item-inner">Los Angeles</span>
-                    </li>
+                    </li> -->
                 </u>
             </div>
         </nav>
@@ -42,7 +42,7 @@
         <div class="main-container mb-3">
             <div class="main-section main-container__left">
                 <div class="img-forecast-container">
-                    <img src="https://www.metaweather.com/static/img/weather/c.svg" class="img-forecast" alt="">
+                    <img src="https://www.metaweather.com/static/img/weather/c.svg" class="img-forecast" id="imgForecast" alt="">
                 </div>
                 <div class="temp-container">
                     <p class="text-temp no-margin" id="lblTemp">21°C</p>
@@ -67,8 +67,8 @@
                     <span>Low</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblRan">0%</span>
-                    <span>Ran</span>
+                    <span id="lblRain">0%</span>
+                    <span>Rain</span>
                 </div>
                 <div class="info-container">
                     <span id="lblSunset">20:57</span>
