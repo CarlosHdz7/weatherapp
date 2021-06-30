@@ -46,4 +46,4 @@ const getCities = async () => {
 }
 
 //[EVENTS]
-btnSearch.addEventListener('click', getCities);
+// btnSearch.addEventListener('click', getCities);

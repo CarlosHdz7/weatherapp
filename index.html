@@ -14,38 +14,94 @@
 
     <div class="container">
 
-        <div class="main-container">
-            <!-- SEARCH BAR -->
-            <nav class="navbar">
-                <input type="text" class="navbar__search" id="txtSearch"> <button type="button" id="btnSearch">Buscar</button>
-            </nav>
-        
-            <!-- MAIN SECTION -->
-            <div class="main-section">
-                <p id="lblCity" class="main-section__city">City</p>
-                <div class="main-section__img-container">
-                    <img src="" alt="img-forecast"  id="imgForecast" class="img-container__img">
-                    <p id="lblTemperature" class="img-container__temperature">Tempeture</p>
+        <!-- SEARCH BAR -->
+        <nav class="navbar">
+            <input type="text" class="navbar__search" id="txtSearch" placeholder="Search Location">
+        </nav>
+
+        <!-- TITLE CONTAINER -->
+        <div class="title-container mb-1">
+            <h1 class="text-city no-margin" id="lblCity">London, UK</h1>
+            <h4 class="text-date no-margin" id="lblDate">Monday, 29 August</h4>
+        </div>
+
+        <!-- MAIN CONTAINER -->
+        <div class="main-container mb-3">
+            <div class="main-section main-container__left">
+                <div class="img-forecast-container">
+                    <img src="https://www.metaweather.com/static/img/weather/c.svg" class="img-forecast" alt="">
                 </div>
-                <p id="lblForecast" class="main-section__forecast">Time</p> 
+                <div class="temp-container">
+                    <p class="text-temp no-margin" id="lblTemp">21°C</p>
+                    <p class="text-forecast no-margin" id="lblForecast">Mostly sunny</p>
+                </div>
+            </div>
+            <div class="main-section main-container__right">
+                <div class="info-container">
+                    <span id="lblHigh">23°</span>
+                    <span>high</span>
+                </div>
+                <div class="info-container">
+                    <span id="lblWind">7mph</span>
+                    <span>Wind</span>
+                </div>
+                <div class="info-container">
+                    <span id="lblSunrise">05:27</span>
+                    <span>Sunrise</span>
+                </div>
+                <div class="info-container">
+                    <span id="lblLow">14°</span>
+                    <span>Low</span>
+                </div>
+                <div class="info-container">
+                    <span id="lblRan">0%</span>
+                    <span>Ran</span>
+                </div>
+                <div class="info-container">
+                    <span id="lblSunset">20:57</span>
+                    <span>Sunset</span>
+                </div>
             </div>
         </div>
 
-        <!-- TIME SECTION -->
-        <div class="time-section">
-            <span id="lblDate">Date</span>
+        <h4 class="no-margin">Forecast days</h4>
+
+        <!-- CARDS CONTAINER -->
+        <div class="cards-container">
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
+            <div class="cards-container__item">
+                <span>Monday</span>
+                <img src="https://www.metaweather.com/static/img/weather/c.svg" alt="" class="card-img">
+                <span>18°</span>
+            </div>
         </div>
-    
-        <!-- DAYS SECTION -->
-        <div class="days-section" id="daysSection">
-            <!-- <div class="days-section__card shadow">
-                <p>day</p>
-                <img src="https://www.metaweather.com/static/img/weather/t.svg" class="mini-img" alt="">
-                <p>Temp</p>
-            </div> -->
-        </div>
+
     </div>
 
-    <script src="scripts/main.js" type="module"></script>
+    <script  src="scripts/main.js" type="module"></script>
 </body>
 </html>
