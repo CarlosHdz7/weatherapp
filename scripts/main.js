@@ -53,16 +53,18 @@ const createItem = (city) => {
   let text = document.createTextNode(city.title);
   li.classList.add('item');
   span.classList.add('item-inner');
-  span.addEventListener('click',selectCity);
-  span.setAttribute('data-woeid',city.woeid);
+  span.addEventListener('click', event => {
+    selectCity(event.target.dataset.woeid);
+  });
+  span.setAttribute('data-woeid', city.woeid);
 
   span.appendChild(text);
   li.appendChild(span);
   itemsFoundContainer.appendChild(li);
 }
 
-const selectCity = async (event) => {
-  let objCityInfo = await search.getInfo(event.target.dataset.woeid);
+const selectCity = async (woeid) => {
+  let objCityInfo = await search.getInfo(woeid);
   setCityinfo(objCityInfo);
 }
 
@@ -87,6 +89,7 @@ const setCityinfo = (objCityInfo) => {
   lblLow.textContent = `${firstday.min_temp.toFixed(2)}°C`;
   lblRain.textContent = `${firstday.predictability}%`;
 
+  while(cardsContainer.firstChild) cardsContainer.removeChild(cardsContainer.firstChild);
   setNexFiveDays(days);
 
   clearResults();
@@ -135,5 +138,12 @@ const clearResults = () => {
   itemsFoundContainer.classList.add('d-none');
 }
 
+const defaultSearch = () => {
+  selectCity(2487956);
+}
+
 //[EVENTS]
 txtSearch.addEventListener('keyup', debounce(getCities,600));
+
+//[SETTINGS]
+defaultSearch();
