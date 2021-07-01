@@ -1,8 +1,8 @@
 'Use strict'
 import './htmlElements.js';
+import { debounce, throttle } from './algorithms.js';
 import ApiWeather from './services/apiWeather.js';
 import Storage from './handleStorage.js';
-import { debounce } from './algorithms/debounce.js';
 
 //[VARIABLES]
 let apiWeather = new ApiWeather();
@@ -140,8 +140,14 @@ const checkLocalStorage = async () => {
   selectCity(2487956); //San francisco
 }
 
+const refresInformation = async () => {
+  checkLocalStorage();
+}
+
 //[EVENTS]
 txtSearch.addEventListener('keyup', debounce(getCities,400));
+
+btnRefresh.addEventListener('click', throttle(refresInformation, 1000));
 
 //[SETTINGS]
 checkLocalStorage();

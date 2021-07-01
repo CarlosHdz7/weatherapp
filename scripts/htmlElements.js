@@ -14,3 +14,4 @@ const lblRain = document.getElementById('lblRain');
 const lblWind = document.getElementById('lblWind');
 const cardsContainer = document.getElementById('cardsContainer');
 const inputImg = document.getElementById('inputImg');
+const btnRefresh = document.getElementById('btnRefresh');
