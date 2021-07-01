@@ -11,19 +11,23 @@
     <title>Weather app</title>
 </head>
 <body>
+    <!-- SEARCH BAR -->
+    <nav class="navbar mb-2">
+        <div class="navbar-button">
+            WeatherApp
+            <img src="img/cloudy.png" class="navbar-img" alt="">
+        </div>
+        <div class="items-container">
+            <div class="search-container">
+                <input type="text" class="search-container__input navbar__search" id="txtSearch" placeholder="Search Location" maxlength="25">
+                <img src="img/search.png" id="inputImg" class="search-container__img">
+            </div>
+            <u class="items-found shadow d-none" id="itemsFoundContainer"></u>
+        </div>
+    </nav>
 
     <div class="container">
 
-        <!-- SEARCH BAR -->
-        <nav class="navbar">
-            <div class="items-container">
-                <div class="search-container">
-                    <input type="text" class="search-container__input navbar__search" id="txtSearch" placeholder="Search Location" maxlength="25">
-                    <img src="img/search.png" id="inputImg" class="search-container__img">
-                </div>
-                <u class="items-found shadow d-none" id="itemsFoundContainer"></u>
-            </div>
-        </nav>
 
         <!-- TITLE CONTAINER -->
         <div class="title-container mb-1">
