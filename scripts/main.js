@@ -38,16 +38,21 @@ const getCities = async () => {
 }
 
 const handleItemsFound = (citiesArray) => {
+  while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
+  
   if(citiesArray.length){
-
-    while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
-
     for(let city of citiesArray){
       createItem(city);
     }
     
-    itemsFoundContainer.classList.remove('d-none');
+  }else{
+    createItem({
+      "title":"No results found.",
+      "woeid":0
+    });
   }
+
+  itemsFoundContainer.classList.remove('d-none');
 }
 
 const createItem = (city) => {
@@ -56,10 +61,13 @@ const createItem = (city) => {
   let text = document.createTextNode(city.title);
   li.classList.add('item');
   span.classList.add('item-inner');
-  span.addEventListener('click', event => {
-    selectCity(event.target.dataset.woeid);
-  });
-  span.setAttribute('data-woeid', city.woeid);
+
+  if(city.woeid){
+    span.setAttribute('data-woeid', city.woeid);
+    span.addEventListener('click', event => {
+      selectCity(event.target.dataset.woeid);
+    });
+  }
 
   span.appendChild(text);
   li.appendChild(span);
