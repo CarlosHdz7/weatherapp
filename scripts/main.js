@@ -18,6 +18,7 @@ const lblHigh = document.getElementById('lblHigh');
 const lblLow = document.getElementById('lblLow');
 const lblRain = document.getElementById('lblRain');
 const lblWind = document.getElementById('lblWind');
+const cardsContainer = document.getElementById('cardsContainer');
 
 //[FUNCTIONS]
 const getCities = async () => {
@@ -74,7 +75,7 @@ const setCityinfo = (objCityInfo) => {
   let firstday;
   let days = objCityInfo.consolidated_weather;
   [firstday] = days;
-  console.log(firstday);
+  // console.log(firstday);
 
   lblTemp.textContent = `${firstday.the_temp.toFixed(2)}°C`;
   lblForecast.textContent = firstday.weather_state_name;
@@ -86,6 +87,8 @@ const setCityinfo = (objCityInfo) => {
   lblLow.textContent = `${firstday.min_temp.toFixed(2)}°C`;
   lblRain.textContent = `${firstday.predictability}%`;
 
+  setNexFiveDays(days);
+
   clearResults();
 }
 
@@ -95,6 +98,37 @@ const debounce = (callback, interval) => {
     clearTimeout(debounceTimeoutId);
     debounceTimeoutId = setTimeout(() => callback.apply(this, args), interval);
   };
+}
+
+const setNexFiveDays = (days) => {
+  for(let i = 1; i < days.length; i++){
+    createDayCard(days[i]);
+  }
+}
+
+const createDayCard = (day) => {
+
+  let div = document.createElement('DIV');
+  let span = document.createElement('SPAN');
+  let img = document.createElement('IMG');
+  let span2 = document.createElement('SPAN');
+
+  let text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', {weekday:'long'}));
+  let text2 = document.createTextNode(`${day.the_temp.toFixed(2)}°C`);
+
+  span.appendChild(text);
+  span.classList.add('card-item__title');
+  div.classList.add('cards-container__item');
+  img.setAttribute('src',`https://www.metaweather.com/static/img/weather/${day.weather_state_abbr}.svg`);
+  img.classList.add('card-img');
+  span2.appendChild(text2);
+
+
+  div.appendChild(span);
+  div.appendChild(img);
+  div.appendChild(span2);
+  
+  cardsContainer.appendChild(div);
 }
 
 const clearResults = () => {
