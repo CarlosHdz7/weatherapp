@@ -51,9 +51,9 @@ const createItem = city => {
 
   if(city.woeid){
     span.setAttribute('data-woeid', city.woeid);
-    span.addEventListener('click', event => {
+    span.addEventListener('click', throttle(() => {
       selectCity(event.target.dataset.woeid);
-    });
+    }, 1000));
   }
 
   span.appendChild(text);
