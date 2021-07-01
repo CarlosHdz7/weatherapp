@@ -1,6 +1,6 @@
 'Use strict'
 import './htmlElements.js';
-import Search from './Search.js';
+import Search from './search.js';
 
 //[VARIABLES]
 let search = new Search();
