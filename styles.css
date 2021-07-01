@@ -107,12 +107,11 @@ body{
     padding: 10px 40px 10px 20px;
     border-radius:var(--radius);
     border:2px solid var(--white);
-    background-color: var(--black);
+    background-color: var(--black2);
     color:var(--white);
     font-weight: 700;
     position:relative
 }
-
 
 .search-container__img {
     position:absolute;
@@ -160,9 +159,6 @@ body{
 }
 
 .cards-container{
-    /* width: 100%;
-    display: flex;
-    justify-content: center; */
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(150px, 1fr));
@@ -202,7 +198,6 @@ body{
 .info-container > :first-child{
     font-weight: 700;
     font-size: 20px;
-
 }
 
 .img-forecast-container{

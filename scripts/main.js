@@ -24,7 +24,7 @@ const getCities = async () => {
   clearResults();
 }
 
-const handleItemsFound = (citiesArray) => {
+const handleItemsFound = citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   
   if(citiesArray.length){
@@ -42,7 +42,7 @@ const handleItemsFound = (citiesArray) => {
   itemsFoundContainer.classList.remove('d-none');
 }
 
-const createItem = (city) => {
+const createItem = city => {
   let li = document.createElement('LI');
   let span = document.createElement('SPAN');
   let text = document.createTextNode(city.title);
@@ -61,13 +61,13 @@ const createItem = (city) => {
   itemsFoundContainer.appendChild(li);
 }
 
-const selectCity = async (woeid) => {
+const selectCity = async woeid => {
   let objCityInfo = await apiWeather.getInfo(woeid);
   await storage.save(woeid);
   setCityinfo(objCityInfo);
 }
 
-const setCityinfo = (objCityInfo) => {
+const setCityinfo = objCityInfo => {
   console.log(objCityInfo);
   txtSearch.value = '';
 
@@ -94,13 +94,13 @@ const setCityinfo = (objCityInfo) => {
   clearResults();
 }
 
-const setNexFiveDays = (days) => {
+const setNexFiveDays = days => {
   for(let i = 1; i < days.length; i++){
     createDayCard(days[i]);
   }
 }
 
-const createDayCard = (day) => {
+const createDayCard = day => {
 
   let div = document.createElement('DIV');
   let span = document.createElement('SPAN');
