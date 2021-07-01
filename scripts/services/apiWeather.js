@@ -4,7 +4,7 @@ export default class ApiWeather {
     this.urlWorkAround = 'https://api.allorigins.win/get?url=';
   }
   
-  async getCities(city){
+  async getCities(city) {
     try {
       const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/search/?query=${city}`) }`);
       if (!response.ok) {   
@@ -18,10 +18,9 @@ export default class ApiWeather {
     } catch (error) {
       console.log(error);
     }
-    
-  }
+  };
 
-  async getInfo(woeid){
+  async getInfo(woeid) {
     try {
       const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
       if (!response.ok) {   
@@ -35,6 +34,6 @@ export default class ApiWeather {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 }
