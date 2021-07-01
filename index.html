@@ -17,51 +17,54 @@
         <!-- SEARCH BAR -->
         <nav class="navbar">
             <div class="items-container">
-                <input type="text" class="navbar__search" id="txtSearch" placeholder="Search Location">
+                <div class="search-container">
+                    <input type="text" class="search-container__input navbar__search" id="txtSearch" placeholder="Search Location">
+                    <img src="img/search.png" id="inputImg" class="search-container__img">
+                </div>
                 <u class="items-found shadow d-none" id="itemsFoundContainer"></u>
             </div>
         </nav>
 
         <!-- TITLE CONTAINER -->
         <div class="title-container mb-1">
-            <h1 class="text-city no-margin" id="lblCity">London, UK</h1>
-            <h4 class="text-date no-margin" id="lblDate">Monday, 29 August</h4>
+            <h1 class="text-city no-margin" id="lblCity">-</h1>
+            <h4 class="text-date no-margin" id="lblDate">-</h4>
         </div>
 
         <!-- MAIN CONTAINER -->
         <div class="main-container mb-3">
             <div class="main-section main-container__left">
                 <div class="img-forecast-container">
-                    <img src="https://www.metaweather.com/static/img/weather/c.svg" class="img-forecast" id="imgForecast" alt="">
+                    <img src="" class="img-forecast" id="imgForecast" alt="">
                 </div>
                 <div class="temp-container">
-                    <p class="text-temp no-margin" id="lblTemp">21°C</p>
-                    <p class="text-forecast no-margin" id="lblForecast">Mostly sunny</p>
+                    <p class="text-temp no-margin" id="lblTemp">-</p>
+                    <p class="text-forecast no-margin" id="lblForecast">-</p>
                 </div>
             </div>
             <div class="main-section main-container__right">
                 <div class="info-container">
-                    <span id="lblHigh">23°</span>
+                    <span id="lblHigh">-</span>
                     <span>high</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblWind">7mph</span>
+                    <span id="lblWind">-</span>
                     <span>Wind</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblSunrise">05:27</span>
+                    <span id="lblSunrise">-</span>
                     <span>Sunrise</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblLow">14°</span>
+                    <span id="lblLow">-</span>
                     <span>Low</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblRain">0%</span>
+                    <span id="lblRain">-</span>
                     <span>Rain</span>
                 </div>
                 <div class="info-container">
-                    <span id="lblSunset">20:57</span>
+                    <span id="lblSunset">-</span>
                     <span>Sunset</span>
                 </div>
             </div>

@@ -19,14 +19,17 @@ const lblLow = document.getElementById('lblLow');
 const lblRain = document.getElementById('lblRain');
 const lblWind = document.getElementById('lblWind');
 const cardsContainer = document.getElementById('cardsContainer');
+const inputImg = document.getElementById('inputImg');
 
 //[FUNCTIONS]
 const getCities = async () => {
   let city = txtSearch.value;
   
   if(city){
+    inputImg.src = 'img/timer.png';
     let response = await search.getCities(city);
     console.log(response);
+    inputImg.src = 'img/search.png';
     handleItemsFound(response);
     return;
   }
@@ -139,7 +142,7 @@ const clearResults = () => {
 }
 
 const defaultSearch = () => {
-  selectCity(2487956);
+  selectCity(2487956); //San francisco
 }
 
 //[EVENTS]
