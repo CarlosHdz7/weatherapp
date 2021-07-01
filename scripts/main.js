@@ -141,7 +141,7 @@ const checkLocalStorage = async () => {
 }
 
 //[EVENTS]
-txtSearch.addEventListener('keyup', debounce(getCities,600));
+txtSearch.addEventListener('keyup', debounce(getCities,400));
 
 //[SETTINGS]
 checkLocalStorage();

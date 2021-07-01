@@ -1,11 +1,19 @@
 export default class Storage {
 
   async save(woeid){
-    localStorage.setItem('woeid', woeid);
+    try {
+      localStorage.setItem('woeid', woeid);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async read(){
-    return localStorage.getItem('woeid');
+    try {
+      return localStorage.getItem('woeid');
+    } catch (error) {
+      console.log(error);
+    }
   }
   
 }

@@ -5,25 +5,36 @@ export default class ApiWeather {
   }
   
   async getCities(city){
-    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/search/?query=${city}`) }`);
-    if (!response.ok) {   
-      const message = `An error has occured: ${response.status}`;    
-      throw new Error(message); 
+    try {
+      const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/search/?query=${city}`) }`);
+      if (!response.ok) {   
+        const message = `An error has occured: ${response.status}`;    
+        throw new Error(message); 
+      }
+  
+      const data = await response.json();
+      return JSON.parse(data.contents);
+      
+    } catch (error) {
+      console.log(error);
     }
-
-    const data = await response.json();
-    return JSON.parse(data.contents);
+    
   }
 
   async getInfo(woeid){
-    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
-    if (!response.ok) {   
-      const message = `An error has occured: ${response.status}`;    
-      throw new Error(message); 
+    try {
+      const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
+      if (!response.ok) {   
+        const message = `An error has occured: ${response.status}`;    
+        throw new Error(message); 
+      }
+      
+      const data = await response.json();
+      return JSON.parse(data.contents);
+      
+    } catch (error) {
+      console.log(error);
     }
-    
-    const data = await response.json();
-    return JSON.parse(data.contents);
   }
 
 }
