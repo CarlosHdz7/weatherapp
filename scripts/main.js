@@ -1,9 +1,11 @@
 'Use strict'
 import './htmlElements.js';
-import Search from './search.js';
+import ApiWeather from './apiWeather.js';
+import Storage from './handleStorage.js';
 
 //[VARIABLES]
-let search = new Search();
+let apiWeather = new ApiWeather();
+let storage = new Storage();
 
 //[FUNCTIONS]
 const getCities = async () => {
@@ -11,7 +13,7 @@ const getCities = async () => {
   
   if(city){
     inputImg.src = 'img/timer.png';
-    let response = await search.getCities(city);
+    let response = await apiWeather.getCities(city);
     console.log(response);
     inputImg.src = 'img/search.png';
     handleItemsFound(response);
@@ -59,8 +61,8 @@ const createItem = (city) => {
 }
 
 const selectCity = async (woeid) => {
-  let objCityInfo = await search.getInfo(woeid);
-  await search.saveSearch(woeid);
+  let objCityInfo = await apiWeather.getInfo(woeid);
+  await storage.save(woeid);
   setCityinfo(objCityInfo);
 }
 
@@ -135,7 +137,7 @@ const clearResults = () => {
 }
 
 const checkLocalStorage = async () => {
-  let woeid = await search.readSearch();
+  let woeid = await storage.read();
 
   if(woeid != null){
     selectCity(woeid);
