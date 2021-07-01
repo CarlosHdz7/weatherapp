@@ -1,7 +1,8 @@
 'Use strict'
 import './htmlElements.js';
-import ApiWeather from './apiWeather.js';
+import ApiWeather from './services/apiWeather.js';
 import Storage from './handleStorage.js';
+import { debounce } from './algorithms/debounce.js';
 
 //[VARIABLES]
 let apiWeather = new ApiWeather();
@@ -91,14 +92,6 @@ const setCityinfo = (objCityInfo) => {
   setNexFiveDays(days);
 
   clearResults();
-}
-
-const debounce = (callback, interval) => {
-  let debounceTimeoutId;
-  return function(...args) {
-    clearTimeout(debounceTimeoutId);
-    debounceTimeoutId = setTimeout(() => callback.apply(this, args), interval);
-  };
 }
 
 const setNexFiveDays = (days) => {
