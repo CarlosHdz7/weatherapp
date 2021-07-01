@@ -21,6 +21,14 @@ class Search {
     const data = await response.json();
     return JSON.parse(data.contents);
   }
+
+  async saveSearch(woeid){
+    localStorage.setItem('woeid', woeid);
+  }
+
+  async readSearch(){
+    return localStorage.getItem('woeid');
+  }
   
 }
 

@@ -76,6 +76,7 @@ const createItem = (city) => {
 
 const selectCity = async (woeid) => {
   let objCityInfo = await search.getInfo(woeid);
+  await search.saveSearch(woeid);
   setCityinfo(objCityInfo);
 }
 
@@ -149,7 +150,14 @@ const clearResults = () => {
   itemsFoundContainer.classList.add('d-none');
 }
 
-const defaultSearch = () => {
+const checkLocalStorage = async () => {
+  let woeid = await search.readSearch();
+
+  if(woeid != null){
+    selectCity(woeid);
+    return;
+  }
+
   selectCity(2487956); //San francisco
 }
 
@@ -157,4 +165,4 @@ const defaultSearch = () => {
 txtSearch.addEventListener('keyup', debounce(getCities,600));
 
 //[SETTINGS]
-defaultSearch();
+checkLocalStorage();
