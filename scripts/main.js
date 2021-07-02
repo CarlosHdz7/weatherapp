@@ -44,7 +44,7 @@ const handleItemsFound = async citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   
   if (citiesArray.length) {
-    
+
     for(let city of citiesArray){
       createItem(city);
     }
@@ -61,25 +61,6 @@ const handleItemsFound = async citiesArray => {
   };
 
   itemsFoundContainer.classList.remove('d-none');
-};
-
-const createItem = city => {
-  let li = document.createElement('LI');
-  let span = document.createElement('SPAN');
-  let text = document.createTextNode(city.title);
-  li.classList.add('item');
-  span.classList.add('item-inner');
-
-  if (city.woeid) {
-    span.setAttribute('data-woeid', city.woeid);
-    span.addEventListener('click', throttle(() => {
-      selectCity(event.target.dataset.woeid);
-    }, 1000));
-  };
-
-  span.appendChild(text);
-  li.appendChild(span);
-  itemsFoundContainer.appendChild(li);
 };
 
 const selectCity = async woeid => {
@@ -146,6 +127,25 @@ const createDayCard = day => {
   div.appendChild(span2);
   
   cardsContainer.appendChild(div);
+};
+
+const createItem = city => {
+  let li = document.createElement('LI');
+  let span = document.createElement('SPAN');
+  let text = document.createTextNode(city.title);
+  li.classList.add('item');
+  span.classList.add('item-inner');
+
+  if (city.woeid) {
+    span.setAttribute('data-woeid', city.woeid);
+    span.addEventListener('click', throttle(() => {
+      selectCity(event.target.dataset.woeid);
+    }, 1000));
+  };
+
+  span.appendChild(text);
+  li.appendChild(span);
+  itemsFoundContainer.appendChild(li);
 };
 
 const clearResults = () => {

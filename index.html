@@ -1,97 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"> 
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='styles.css'>
+    <link rel='shortcut icon' href='/img/favicon.ico'>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap' rel='stylesheet'> 
     <title>Weather app</title>
 </head>
 <body>
     <!-- SEARCH BAR -->
-    <nav class="navbar mb-2">
-        <div class="navbar-button">
+    <nav class='navbar mb-2'>
+        <div class='navbar-button'>
             WeatherApp
-            <img src="img/cloudy.png" class="navbar-img" alt="">
+            <img src='img/cloudy.png' class='navbar-img' alt=''>
         </div>
-        <div class="items-container">
-            <div class="search-container">
-                <input type="text" class="search-container__input navbar__search" id="txtSearch" placeholder="Search Location" maxlength="25">
-                <img src="img/search.png" id="inputImg" class="search-container__img">
+        <div class='items-container'>
+            <div class='search-container'>
+                <input type='text' class='search-container__input navbar__search' id='txtSearch' placeholder='Search Location' maxlength='25'>
+                <img src='img/search.png' id='inputImg' class='search-container__img'>
             </div>
-            <u class="items-found shadow d-none" id="itemsFoundContainer"></u>
+            <u class='items-found shadow d-none' id='itemsFoundContainer'></u>
         </div>
     </nav>
 
-    <div class="container">
+    <div class='container'>
 
-        <p id="errorMessage"></p>
+        <p id='errorMessage'></p>
 
         <!-- TITLE CONTAINER -->
-        <div class="title-container mb-1">
+        <div class='title-container mb-1'>
             <div>
-                <h1 class="text-city no-margin" id="lblCity">-</h1>
-                <h4 class="text-date no-margin" id="lblDate">-</h4>
+                <h1 class='text-city no-margin' id='lblCity'>-</h1>
+                <h4 class='text-date no-margin' id='lblDate'>-</h4>
             </div>
-            <div class="container-button"> 
-                <div  class="container-button__button" id="btnRefresh"></div>
+            <div class='container-button'> 
+                <div  class='container-button__button' id='btnRefresh'></div>
             </div>
         </div>
 
         <!-- MAIN CONTAINER -->
-        <div class="main-container mb-3">
-            <div class="main-section main-container__left">
-                <div class="img-forecast-container">
-                    <img src="" class="img-forecast" id="imgForecast" alt="">
+        <div class='main-container mb-3'>
+            <div class='main-section main-container__left'>
+                <div class='img-forecast-container'>
+                    <img src='' class='img-forecast' id='imgForecast' alt=''>
                 </div>
-                <div class="temp-container">
-                    <p class="text-temp no-margin" id="lblTemp">-</p>
-                    <p class="text-forecast no-margin" id="lblForecast">-</p>
+                <div class='temp-container'>
+                    <p class='text-temp no-margin' id='lblTemp'>-</p>
+                    <p class='text-forecast no-margin' id='lblForecast'>-</p>
                 </div>
             </div>
-            <div class="main-section main-container__right">
-                <div class="info-container">
-                    <span id="lblHigh">-</span>
+            <div class='main-section main-container__right'>
+                <div class='info-container'>
+                    <span id='lblHigh'>-</span>
                     <span>high</span>
                 </div>
-                <div class="info-container">
-                    <span id="lblWind">-</span>
+                <div class='info-container'>
+                    <span id='lblWind'>-</span>
                     <span>Wind</span>
                 </div>
-                <div class="info-container">
-                    <span id="lblSunrise">-</span>
+                <div class='info-container'>
+                    <span id='lblSunrise'>-</span>
                     <span>Sunrise</span>
                 </div>
-                <div class="info-container">
-                    <span id="lblLow">-</span>
+                <div class='info-container'>
+                    <span id='lblLow'>-</span>
                     <span>Low</span>
                 </div>
-                <div class="info-container">
-                    <span id="lblRain">-</span>
+                <div class='info-container'>
+                    <span id='lblRain'>-</span>
                     <span>Rain</span>
                 </div>
-                <div class="info-container">
-                    <span id="lblSunset">-</span>
+                <div class='info-container'>
+                    <span id='lblSunset'>-</span>
                     <span>Sunset</span>
                 </div>
             </div>
         </div>
 
-        <h4 class="no-margin">Forecast days</h4>
+        <h4 class='no-margin'>Forecast days</h4>
 
         <!-- CARDS CONTAINER -->
-        <div class="cards-container" id="cardsContainer"></div>
+        <div class='cards-container' id='cardsContainer'></div>
 
-        <div class="loader" id="loader">
-            <img src="img/timer.png" id="imgLoader" alt="">
-            <p id="textLoader">Loading...</p>
+        <div class='loader' id='loader'>
+            <img src='img/timer.png' id='imgLoader' alt=''>
+            <p id='textLoader'>Loading...</p>
         </div>
     </div>
     
-    <script  src="scripts/main.js" type="module"></script>
+    <script  src='scripts/main.js' type='module'></script>
 </body>
 </html>
