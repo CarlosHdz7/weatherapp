@@ -63,7 +63,7 @@ const selectCity = async woeid => {
 
     clearResults();
     const objCityInfo = await apiWeather.getInfo(woeid);
-    storage.save(woeid);
+    storage.save('woeid', woeid);
     await setCityinfo(objCityInfo);
 
     handleLoader('remove');
@@ -145,14 +145,19 @@ const clearResults = () => {
 };
 
 const checkLocalStorage = async () => {
-  const WOEID = await storage.read();
-
-  if(!WOEID){
-    selectCity(DEFAULTWOEID); //San francisco
-    return;
-  }
+  try {
+    const WOEID = await storage.read('woeid');
   
-  selectCity(WOEID);
+    if(!WOEID){
+      selectCity(DEFAULTWOEID);
+      return;
+    }
+    
+    selectCity(WOEID);
+
+  } catch (error) {
+    selectCity(DEFAULTWOEID); 
+  }
 };
 
 //[EVENTS]
