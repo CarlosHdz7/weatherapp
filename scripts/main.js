@@ -7,18 +7,25 @@ import Storage from './handleStorage.js';
 //[VARIABLES]
 let apiWeather = new ApiWeather();
 let storage = new Storage();
+let activeResults = false;
 
 //[FUNCTIONS]
-const getCities = async () => {
+const getCities = async (event) => {
   let city = txtSearch.value;
-  
+
   if (city) {
     try {
+      
       inputImg.src = 'img/timer.png';
       let response = await apiWeather.getCities(city);
-      console.log(response);
       inputImg.src = 'img/search.png';
-      handleItemsFound(response);
+
+      await handleItemsFound(response);
+
+      if (event.keyCode === 13 && activeResults) {
+        selectCity(itemsFoundContainer.firstChild.firstChild.dataset.woeid);
+      }
+
       return;
     } catch (error) {
       alert(error);
@@ -28,19 +35,23 @@ const getCities = async () => {
   clearResults();
 };
 
-const handleItemsFound = citiesArray => {
+const handleItemsFound = async citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   
   if (citiesArray.length) {
     for(let city of citiesArray){
       createItem(city);
     }
+
+    activeResults = true;
     
   } else {
     createItem({
       "title":"No results found.",
       "woeid":0
     });
+
+    activeResults = false;
   };
 
   itemsFoundContainer.classList.remove('d-none');
@@ -76,7 +87,6 @@ const selectCity = async woeid => {
 };
 
 const setCityinfo = objCityInfo => {
-  console.log(objCityInfo);
   txtSearch.value = '';
 
   lblCity.textContent = objCityInfo.title;
@@ -133,6 +143,7 @@ const createDayCard = day => {
 
 const clearResults = () => {
   itemsFoundContainer.classList.add('d-none');
+  activeResults = false;
 };
 
 const checkLocalStorage = async () => {
