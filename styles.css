@@ -20,11 +20,10 @@ body{
 
 .container{
     box-sizing: border-box;
-    padding: 0px 15px;
+    padding: 30px 20px;
     width: 100%;
     max-width: 900px;
     margin: auto;
-    padding-top: 30px;
 }
 
 .items-container{
@@ -295,5 +294,15 @@ body{
     .search-container__input,.search-container__img{
         display: none;
     }
+
+    .text-temp{
+        font-size: 40px;
+    }
+
+    .info-container > :first-child{
+        font-weight: 700;
+        font-size: 15px;
+    }
+    
 
 }
