@@ -29,6 +29,7 @@
 
     <div class="container">
 
+        <p id="errorMessage"></p>
 
         <!-- TITLE CONTAINER -->
         <div class="title-container mb-1">
@@ -85,9 +86,12 @@
         <!-- CARDS CONTAINER -->
         <div class="cards-container" id="cardsContainer"></div>
 
-        <div class="loader" id="loader"></div>
+        <div class="loader" id="loader">
+            <img src="img/timer.png" id="imgLoader" alt="">
+            <p id="textLoader">Loading...</p>
+        </div>
     </div>
-
+    
     <script  src="scripts/main.js" type="module"></script>
 </body>
 </html>

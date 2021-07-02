@@ -22,18 +22,41 @@ const getCities = async (event) => {
 
       await handleItemsFound(response);
 
+      clearErrorMessage('search');
+
       if (event.keyCode === 13 && activeResults) {
         selectCity(itemsFoundContainer.firstChild.firstChild.dataset.woeid);
-      }
-
-      return;
+      }     
+      
     } catch (error) {
-      alert(error);
+      showErrorMessage('search','There was a problem loading the cities.')
     }
+
+    return;
   };
 
   clearResults();
 };
+
+const showErrorMessage = (type, message = 'A problem has ocurred.') => {
+  if (type === 'search') {
+    inputImg.src = 'img/search.png';
+    errorMessage.textContent = message;
+    loader.style.display = 'none';
+  }
+
+  if (type === 'getInfo') {
+    imgLoader.src = './img/close.png';
+    loader.style.display = 'flex';
+    textLoader.textContent = message;
+  }
+}
+
+const clearErrorMessage = (type) => {
+  if(type === 'search'){
+    errorMessage.textContent = '';
+  }
+}
 
 const handleItemsFound = async citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
@@ -79,15 +102,18 @@ const createItem = city => {
 const selectCity = async woeid => {
   try {
     clearResults();
+    loader.style.display = 'flex';
     let objCityInfo = await apiWeather.getInfo(woeid);
     storage.save(woeid);
-    setCityinfo(objCityInfo);
+    await setCityinfo(objCityInfo);
+    loader.style.display = 'none';
+    textLoader.textContent = 'Loading ...'
   } catch (error) {
-    alert(error);
+    showErrorMessage('getInfo','A problem has ocurred when trying to fetch city info.');
   }
 };
 
-const setCityinfo = objCityInfo => {
+const setCityinfo = async objCityInfo => {
   lblCity.textContent = objCityInfo.title;
   lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   let firstday;

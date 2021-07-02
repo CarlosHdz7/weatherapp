@@ -15,3 +15,7 @@ const lblWind = document.getElementById('lblWind');
 const cardsContainer = document.getElementById('cardsContainer');
 const inputImg = document.getElementById('inputImg');
 const btnRefresh = document.getElementById('btnRefresh');
+const loader = document.getElementById('loader');
+const errorMessage = document.getElementById('errorMessage');
+const imgLoader = document.getElementById('imgLoader');
+const textLoader = document.getElementById('textLoader');
