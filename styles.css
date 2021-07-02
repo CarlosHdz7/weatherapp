@@ -293,7 +293,7 @@ body{
     }
 
     .search-container__input,.search-container__img{
-        display: none;
+        /* display: none; */
     }
 
     .text-temp{
