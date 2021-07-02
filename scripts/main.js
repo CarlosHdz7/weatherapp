@@ -1,5 +1,7 @@
 'Use strict'
 import './htmlElements.js';
+import { clearErrorMessage, showErrorMessage } from './handleErrors.js';
+import { handleLoader } from './utilities.js';
 import { debounce, throttle } from './algorithms.js';
 import ApiWeather from './services/apiWeather.js';
 import Storage from './handleStorage.js';
@@ -38,30 +40,11 @@ const getCities = async (event) => {
   clearResults();
 };
 
-const showErrorMessage = (type, message = 'A problem has ocurred.') => {
-  if (type === 'search') {
-    inputImg.src = 'img/search.png';
-    errorMessage.textContent = message;
-    loader.style.display = 'none';
-  }
-
-  if (type === 'getInfo') {
-    imgLoader.src = './img/close.png';
-    loader.style.display = 'flex';
-    textLoader.textContent = message;
-  }
-}
-
-const clearErrorMessage = (type) => {
-  if(type === 'search'){
-    errorMessage.textContent = '';
-  }
-}
-
 const handleItemsFound = async citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   
   if (citiesArray.length) {
+    
     for(let city of citiesArray){
       createItem(city);
     }
@@ -101,13 +84,14 @@ const createItem = city => {
 
 const selectCity = async woeid => {
   try {
+    handleLoader('set');
+
     clearResults();
-    loader.style.display = 'flex';
     let objCityInfo = await apiWeather.getInfo(woeid);
     storage.save(woeid);
     await setCityinfo(objCityInfo);
-    loader.style.display = 'none';
-    textLoader.textContent = 'Loading ...'
+
+    handleLoader('remove');
   } catch (error) {
     showErrorMessage('getInfo','A problem has ocurred when trying to fetch city info.');
   }
@@ -131,10 +115,10 @@ const setCityinfo = async objCityInfo => {
   lblRain.textContent = `${ firstday.predictability }%`;
 
   while(cardsContainer.firstChild) cardsContainer.removeChild(cardsContainer.firstChild);
-  setNexFiveDays(days);
+  await setNexFiveDays(days);
 };
 
-const setNexFiveDays = days => {
+const setNexFiveDays = async days => {
   for(let i = 1; i < days.length; i++){
     createDayCard(days[i]);
   }
