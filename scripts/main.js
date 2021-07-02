@@ -9,7 +9,8 @@ import Storage from './handleStorage.js';
 //[VARIABLES]
 const apiWeather = new ApiWeather();
 const storage = new Storage();
-const baseUrlMeta = 'https://www.metaweather.com';
+const BASEURLMETA = 'https://www.metaweather.com';
+const DEFAULTWOEID = 2487956; //San Francisco
 
 //[FUNCTIONS]
 const getCities = async event => {
@@ -79,7 +80,7 @@ const setCityinfo = async objCityInfo => {
 
   lblTemp.textContent = `${ firstday.the_temp.toFixed(2) }°C`;
   lblForecast.textContent = firstday.weather_state_name;
-  imgForecast.src = `${ baseUrlMeta }/static/img/weather/${ firstday.weather_state_abbr }.svg`;
+  imgForecast.src = `${ BASEURLMETA }/static/img/weather/${ firstday.weather_state_abbr }.svg`;
   lblWind.textContent = `${ firstday.wind_speed.toFixed(2) } mph`;
   lblSunrise.textContent = new Date(objCityInfo.sun_rise).toLocaleString(navigator.language, { hour: '2-digit', minute:'2-digit' });
   lblSunset.textContent = new Date(objCityInfo.sun_set).toLocaleString(navigator.language, { hour: '2-digit', minute:'2-digit' });
@@ -108,7 +109,7 @@ const createDayCard = day => {
   span.appendChild(text);
   span.classList.add('card-item__title');
   div.classList.add('cards-container__item');
-  img.setAttribute('src',`${ baseUrlMeta }/static/img/weather/${ day.weather_state_abbr }.svg`);
+  img.setAttribute('src',`${ BASEURLMETA }/static/img/weather/${ day.weather_state_abbr }.svg`);
   img.classList.add('card-img');
   span2.appendChild(text2);
 
@@ -144,14 +145,14 @@ const clearResults = () => {
 };
 
 const checkLocalStorage = async () => {
-  const woeid = await storage.read();
+  const WOEID = await storage.read();
 
-  if(woeid != null){
-    selectCity(woeid);
+  if(!WOEID){
+    selectCity(DEFAULTWOEID); //San francisco
     return;
   }
-
-  selectCity(2487956); //San francisco
+  
+  selectCity(WOEID);
 };
 
 //[EVENTS]
