@@ -13,12 +13,16 @@ const getCities = async () => {
   let city = txtSearch.value;
   
   if (city) {
-    inputImg.src = 'img/timer.png';
-    let response = await apiWeather.getCities(city);
-    console.log(response);
-    inputImg.src = 'img/search.png';
-    handleItemsFound(response);
-    return;
+    try {
+      inputImg.src = 'img/timer.png';
+      let response = await apiWeather.getCities(city);
+      console.log(response);
+      inputImg.src = 'img/search.png';
+      handleItemsFound(response);
+      return;
+    } catch (error) {
+      alert(error);
+    }
   };
 
   clearResults();
@@ -62,9 +66,13 @@ const createItem = city => {
 };
 
 const selectCity = async woeid => {
-  let objCityInfo = await apiWeather.getInfo(woeid);
-  await storage.save(woeid);
-  setCityinfo(objCityInfo);
+  try {
+    let objCityInfo = await apiWeather.getInfo(woeid);
+    await storage.save(woeid);
+    setCityinfo(objCityInfo);
+  } catch (error) {
+    alert(error);
+  }
 };
 
 const setCityinfo = objCityInfo => {
