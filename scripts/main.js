@@ -158,7 +158,7 @@ const checkLocalStorage = async () => {
 };
 
 //[EVENTS]
-txtSearch.addEventListener('keyup', debounce(getCities, 400));
+txtSearch.addEventListener('keyup', debounce(getCities, 300));
 
 btnRefresh.addEventListener('click', throttle(checkLocalStorage, 1000));
 
