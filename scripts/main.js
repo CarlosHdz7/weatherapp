@@ -7,19 +7,19 @@ import ApiWeather from './services/apiWeather.js';
 import Storage from './handleStorage.js';
 
 //[VARIABLES]
-let apiWeather = new ApiWeather();
-let storage = new Storage();
+const apiWeather = new ApiWeather();
+const storage = new Storage();
 let activeResults = false;
 
 //[FUNCTIONS]
-const getCities = async (event) => {
-  let city = txtSearch.value.trim();
+const getCities = async event => {
+  const city = txtSearch.value.trim();
 
   if (city) {
     try {
       
       inputImg.src = 'img/timer.png';
-      let response = await apiWeather.getCities(city);
+      const response = await apiWeather.getCities(city);
       inputImg.src = 'img/search.png';
 
       await handleItemsFound(response);
@@ -68,7 +68,7 @@ const selectCity = async woeid => {
     handleLoader('set');
 
     clearResults();
-    let objCityInfo = await apiWeather.getInfo(woeid);
+    const objCityInfo = await apiWeather.getInfo(woeid);
     storage.save(woeid);
     await setCityinfo(objCityInfo);
 
@@ -81,9 +81,8 @@ const selectCity = async woeid => {
 const setCityinfo = async objCityInfo => {
   lblCity.textContent = objCityInfo.title;
   lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
-  let firstday;
-  let days = objCityInfo.consolidated_weather;
-  [firstday] = days;
+  const days = objCityInfo.consolidated_weather;
+  const [firstday] = days;
 
   lblTemp.textContent = `${ firstday.the_temp.toFixed(2) }°C`;
   lblForecast.textContent = firstday.weather_state_name;
@@ -107,13 +106,13 @@ const setNexFiveDays = async days => {
 
 const createDayCard = day => {
 
-  let div = document.createElement('DIV');
-  let span = document.createElement('SPAN');
-  let img = document.createElement('IMG');
-  let span2 = document.createElement('SPAN');
+  const div = document.createElement('DIV');
+  const span = document.createElement('SPAN');
+  const img = document.createElement('IMG');
+  const span2 = document.createElement('SPAN');
 
-  let text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', { weekday:'long' }));
-  let text2 = document.createTextNode(`${ day.the_temp.toFixed(2) }°C`);
+  const text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', { weekday:'long' }));
+  const text2 = document.createTextNode(`${ day.the_temp.toFixed(2) }°C`);
 
   span.appendChild(text);
   span.classList.add('card-item__title');
@@ -130,9 +129,9 @@ const createDayCard = day => {
 };
 
 const createItem = city => {
-  let li = document.createElement('LI');
-  let span = document.createElement('SPAN');
-  let text = document.createTextNode(city.title);
+  const li = document.createElement('LI');
+  const span = document.createElement('SPAN');
+  const text = document.createTextNode(city.title);
   li.classList.add('item');
   span.classList.add('item-inner');
 
@@ -155,7 +154,7 @@ const clearResults = () => {
 };
 
 const checkLocalStorage = async () => {
-  let woeid = await storage.read();
+  const woeid = await storage.read();
 
   if(woeid != null){
     selectCity(woeid);
