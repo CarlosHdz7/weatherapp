@@ -5,8 +5,6 @@ export default class ApiWeather {
   }
   
   async getCities(city) {
-    // throw new Error(''); 
-
     const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/search/?query=${city}`) }`);
     if (!response.ok) {   
       const message = `An error has occured: ${response.status}`;    
@@ -18,8 +16,6 @@ export default class ApiWeather {
   };
 
   async getInfo(woeid) {
-    // throw new Error(''); 
-
     const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
     if (!response.ok) {   
       const message = `An error has occured: ${response.status}`;    

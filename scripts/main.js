@@ -13,7 +13,7 @@ let activeResults = false;
 
 //[FUNCTIONS]
 const getCities = async (event) => {
-  let city = txtSearch.value;
+  let city = txtSearch.value.trim();
 
   if (city) {
     try {
