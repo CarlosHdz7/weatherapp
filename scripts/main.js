@@ -78,8 +78,9 @@ const createItem = city => {
 
 const selectCity = async woeid => {
   try {
+    clearResults();
     let objCityInfo = await apiWeather.getInfo(woeid);
-    await storage.save(woeid);
+    storage.save(woeid);
     setCityinfo(objCityInfo);
   } catch (error) {
     alert(error);
@@ -87,8 +88,6 @@ const selectCity = async woeid => {
 };
 
 const setCityinfo = objCityInfo => {
-  txtSearch.value = '';
-
   lblCity.textContent = objCityInfo.title;
   lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   let firstday;
@@ -107,8 +106,6 @@ const setCityinfo = objCityInfo => {
 
   while(cardsContainer.firstChild) cardsContainer.removeChild(cardsContainer.firstChild);
   setNexFiveDays(days);
-
-  clearResults();
 };
 
 const setNexFiveDays = days => {
@@ -142,6 +139,7 @@ const createDayCard = day => {
 };
 
 const clearResults = () => {
+  txtSearch.value = '';
   itemsFoundContainer.classList.add('d-none');
   activeResults = false;
 };
