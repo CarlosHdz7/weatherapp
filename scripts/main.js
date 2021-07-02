@@ -9,7 +9,6 @@ import Storage from './handleStorage.js';
 //[VARIABLES]
 const apiWeather = new ApiWeather();
 const storage = new Storage();
-let activeResults = false;
 
 //[FUNCTIONS]
 const getCities = async event => {
@@ -19,15 +18,14 @@ const getCities = async event => {
     try {
       
       inputImg.src = 'img/timer.png';
-      const response = await apiWeather.getCities(city);
+      const cities = await apiWeather.getCities(city);
       inputImg.src = 'img/search.png';
-
-      await handleItemsFound(response);
-
+      await handleItemsFound(cities);
+      
       clearErrorMessage('search');
 
-      if (event.keyCode === 13 && activeResults) {
-        selectCity(itemsFoundContainer.firstChild.firstChild.dataset.woeid);
+      if (event.keyCode === 13 && cities.length) {
+        selectCity(cities[0].woeid); 
       }     
       
     } catch (error) {
@@ -44,20 +42,12 @@ const handleItemsFound = async citiesArray => {
   while(itemsFoundContainer.firstChild) itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   
   if (citiesArray.length) {
-
-    for(let city of citiesArray){
-      createItem(city);
-    }
-
-    activeResults = true;
-    
+    for(let city of citiesArray){ createItem(city); };
   } else {
     createItem({
       "title":"No results found.",
       "woeid":0
     });
-
-    activeResults = false;
   };
 
   itemsFoundContainer.classList.remove('d-none');
@@ -105,12 +95,10 @@ const setNexFiveDays = async days => {
 };
 
 const createDayCard = day => {
-
   const div = document.createElement('DIV');
   const span = document.createElement('SPAN');
   const img = document.createElement('IMG');
   const span2 = document.createElement('SPAN');
-
   const text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', { weekday:'long' }));
   const text2 = document.createTextNode(`${ day.the_temp.toFixed(2) }°C`);
 
@@ -150,7 +138,6 @@ const createItem = city => {
 const clearResults = () => {
   txtSearch.value = '';
   itemsFoundContainer.classList.add('d-none');
-  activeResults = false;
 };
 
 const checkLocalStorage = async () => {
