@@ -6,6 +6,7 @@
     --white:#fff;
     --black:#222831;
     --black2:#161A20;
+    --green:#99FF96;
     --radius:10px;
 }
 
@@ -127,6 +128,10 @@ body{
     color:var(--white);
     font-weight: 700;
     position:relative
+}
+
+.search-container__input:focus{
+    outline: 2px solid var(--green);
 }
 
 .search-container__img {
