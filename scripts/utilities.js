@@ -10,6 +10,14 @@ const handleLoader = (option) => {
   }
 }
 
+const containClasses = (elementClasses, validClasses) => {
+  for(let eClass of elementClasses){
+    if(validClasses.includes(eClass)) return true;
+  }
+  return false;
+}
+
 export {
-  handleLoader
+  handleLoader,
+  containClasses
 }

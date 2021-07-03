@@ -1,7 +1,7 @@
 'Use strict'
 import './htmlElements.js';
 import { clearSearchError, displayError } from './handleErrors.js';
-import { handleLoader } from './utilities.js';
+import { handleLoader, containClasses } from './utilities.js';
 import { debounce, throttle } from './algorithms.js';
 import ApiWeather from './services/apiWeather.js';
 import Storage from './handleStorage.js';
@@ -9,6 +9,7 @@ import Storage from './handleStorage.js';
 //[VARIABLES]
 const apiWeather = new ApiWeather();
 const storage = new Storage();
+const VALIDCLASSES = ['item-inner','search-container__input','items-found','item'];
 const BASEURLMETA = 'https://www.metaweather.com';
 const DEFAULTWOEID = 2487956; //San Francisco
 
@@ -46,8 +47,6 @@ const getCityInfo = async woeid => {
 
     hideResultList();
     const objCityInfo = await apiWeather.getCityInfo(woeid);
-
-    console.log(objCityInfo);
 
     storage.save('woeid', woeid);
     await displayCityData(objCityInfo);
@@ -178,10 +177,12 @@ txtSearch.addEventListener('mouseover', () => {
   itemsFoundContainer.classList.remove('d-none');
 });
 
-document.addEventListener('click', (event) => {
-  if(!event.target.classList.contains('item-inner')  && !event.target.classList.contains('search-container__input') && !event.target.classList.contains('items-found') && !event.target.classList.contains('item')){
+document.addEventListener('click', (event) => {  
+  const targetClasses = Array.from(event.target.classList); 
+
+  if (!containClasses(targetClasses, VALIDCLASSES)) { 
     itemsFoundContainer.classList.add('d-none');
-  }
+  };
 })
 
 //[SETTINGS]
