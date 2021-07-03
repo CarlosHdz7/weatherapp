@@ -37,14 +37,14 @@ const getCities = async event => {
     return;
   };
 
-  clearResults();
+  hideResultList();
 };
 
 const getCityInfo = async woeid => {
   try {
     handleLoader('set');
 
-    clearResults();
+    hideResultList();
     const objCityInfo = await apiWeather.getCityInfo(woeid);
     storage.save('woeid', woeid);
     await displayCityData(objCityInfo);
@@ -56,16 +56,14 @@ const getCityInfo = async woeid => {
 };
 
 const displayResultsList = async citiesArray => {
-  while(itemsFoundContainer.firstChild) {
-    itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
-  }
+  await clearItemsResultList();
   
   if (citiesArray.length) {
-    for(let city of citiesArray){ createItem(city); };
+    for(let city of citiesArray){ createItemResult(city); };
   } else {
-    createItem({
-      "title":"No results found.",
-      "woeid":0
+    createItemResult({
+      'title':'No results found.',
+      'woeid':0
     });
   };
 
@@ -99,10 +97,10 @@ const displayNextFiveDays = async days => {
 };
 
 const createDayCard = day => {
-  const div = document.createElement('DIV');
-  const span = document.createElement('SPAN');
-  const img = document.createElement('IMG');
-  const span2 = document.createElement('SPAN');
+  const div = document.createElement('div');
+  const span = document.createElement('span');
+  const img = document.createElement('img');
+  const span2 = document.createElement('span');
   const text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', { weekday:'long' }));
   const text2 = document.createTextNode(`${ day.the_temp.toFixed(2) }°C`);
 
@@ -120,9 +118,9 @@ const createDayCard = day => {
   cardsContainer.appendChild(div);
 };
 
-const createItem = city => {
-  const li = document.createElement('LI');
-  const span = document.createElement('SPAN');
+const createItemResult = city => {
+  const li = document.createElement('li');
+  const span = document.createElement('span');
   const text = document.createTextNode(city.title);
   li.classList.add('item');
   span.classList.add('item-inner');
@@ -140,10 +138,17 @@ const createItem = city => {
   itemsFoundContainer.appendChild(li);
 };
 
-const clearResults = () => {
+const hideResultList = async () => {
+  await clearItemsResultList();
   txtSearch.value = '';
   itemsFoundContainer.classList.add('d-none');
 };
+
+const clearItemsResultList = async () => {
+  while(itemsFoundContainer.firstChild) {
+    itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
+  }
+}
 
 const checkLastSearch = async () => {
   try {
