@@ -229,6 +229,12 @@ body{
     background-color: var(--black2);
 }
 
+.cards-container__item:hover{
+    background-color: var(--white);
+    color:var(--black2);
+    transition: background-color 0.1s ease-in;
+}
+
 .card-item__title{
     font-weight: 700;
 }
