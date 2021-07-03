@@ -96,9 +96,9 @@ body{
 .navbar-button{
     padding:1px 15px;
     border:none;
-    background: #a8ff78;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #78ffd6, #a8ff78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #a8ff78; 
+    background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78); 
+    background: linear-gradient(to right, #78ffd6, #a8ff78); 
     border-radius: var(--radius);
     font-weight: 700;
     color:var(--black2);
@@ -309,21 +309,6 @@ body{
         padding-top: 10px;
     }
 
-    /* .navbar-button{
-        display: none;
-    } */
-
-    /* .items-container{
-        width: 100%;
-
-    } */
-
-    /* .search-container__input{
-        box-sizing: border-box;
-        width: 100%;
-        height: 40px;
-    } */
-
     .text-temp{
         font-size: 40px;
     }
@@ -343,7 +328,6 @@ body{
 
     .items-container{
         width: 100%;
-
     }
 
     .search-container__input{
