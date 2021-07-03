@@ -17,7 +17,8 @@ const DEFAULTWOEID = 2487956; //San Francisco
 const getCities = async event => {
   const city = txtSearch.value.trim();
 
-  if (city && city.length <= 25) {
+  if (city && city.length <= 25
+    ) {
     try {
       
       inputImg.src = 'img/timer.png';
@@ -38,6 +39,7 @@ const getCities = async event => {
     return;
   };
 
+  txtSearch.value = '';
   await clearItemsResultList();
   hideResultList();
 };
