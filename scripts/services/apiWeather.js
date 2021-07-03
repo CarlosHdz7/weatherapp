@@ -2,10 +2,11 @@ export default class ApiWeather {
 
   constructor(){
     this.urlWorkAround = 'https://api.allorigins.win/get?url=';
+    this.baseUrlMeta = 'https://www.metaweather.com';
   }
   
   async getCities(city) {
-    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/search/?query=${city}`) }`);
+    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`${ this.baseUrlMeta }/api/location/search/?query=${city}`) }`);
     if (!response.ok) {   
       const message = `An error has occured: ${response.status}`;    
       throw new Error(message); 
@@ -16,7 +17,7 @@ export default class ApiWeather {
   };
 
   async getCityInfo(woeid) {
-    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
+    const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`${ this.baseUrlMeta }/api/location/${woeid}/`) }`);
     if (!response.ok) {   
       const message = `An error has occured: ${response.status}`;    
       throw new Error(message); 
