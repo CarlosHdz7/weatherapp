@@ -22,12 +22,12 @@ const getCities = async event => {
       inputImg.src = 'img/timer.png';
       const cities = await apiWeather.getCities(city);
       inputImg.src = 'img/search.png';
-      await handleItemsFound(cities);
 
+      await displayResultsList(cities);
       clearErrorMessage('search');
 
       if (event.keyCode === 13 && cities.length) {
-        selectCity(cities[0].woeid); 
+        getCityInfo(cities[0].woeid); 
       }     
       
     } catch (error) {
@@ -40,7 +40,22 @@ const getCities = async event => {
   clearResults();
 };
 
-const handleItemsFound = async citiesArray => {
+const getCityInfo = async woeid => {
+  try {
+    handleLoader('set');
+
+    clearResults();
+    const objCityInfo = await apiWeather.getCityInfo(woeid);
+    storage.save('woeid', woeid);
+    await displayCityData(objCityInfo);
+
+    handleLoader('remove');
+  } catch (error) {
+    showErrorMessage('getCityInfo','A problem has ocurred when trying to fetch city info.');
+  }
+};
+
+const displayResultsList = async citiesArray => {
   while(itemsFoundContainer.firstChild) {
     itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
   }
@@ -55,21 +70,6 @@ const handleItemsFound = async citiesArray => {
   };
 
   itemsFoundContainer.classList.remove('d-none');
-};
-
-const selectCity = async woeid => {
-  try {
-    handleLoader('set');
-
-    clearResults();
-    const objCityInfo = await apiWeather.getCityInfo(woeid);
-    storage.save('woeid', woeid);
-    await displayCityData(objCityInfo);
-
-    handleLoader('remove');3
-  } catch (error) {
-    showErrorMessage('getCityInfo','A problem has ocurred when trying to fetch city info.');
-  }
 };
 
 const displayCityData = async objCityInfo => {
@@ -130,7 +130,7 @@ const createItem = city => {
   if (city.woeid) {
     span.setAttribute('data-woeid', city.woeid);
     span.addEventListener('click', throttle(() => {
-      selectCity(event.target.dataset.woeid);
+      getCityInfo(event.target.dataset.woeid);
     }, 1000));
   };
 
@@ -149,14 +149,14 @@ const checkLastSearch = async () => {
     const WOEID = await storage.read('woeid');
   
     if(!WOEID){
-      selectCity(DEFAULTWOEID);
+      getCityInfo(DEFAULTWOEID);
       return;
     }
     
-    selectCity(WOEID);
+    getCityInfo(WOEID);
 
   } catch (error) {
-    selectCity(DEFAULTWOEID); 
+    getCityInfo(DEFAULTWOEID); 
   }
 };
 
