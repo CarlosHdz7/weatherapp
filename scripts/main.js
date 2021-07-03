@@ -128,6 +128,7 @@ const createItem = city => {
   span.classList.add('item-inner');
 
   if (city.woeid) {
+    span.classList.add('item-inner--selectable');
     span.setAttribute('data-woeid', city.woeid);
     span.addEventListener('click', throttle(() => {
       getCityInfo(event.target.dataset.woeid);

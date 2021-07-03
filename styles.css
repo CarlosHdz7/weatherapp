@@ -77,7 +77,7 @@ body{
     border-radius: var(--radius);
 }
 
-.item-inner:hover{
+.item-inner--selectable:hover{
     background-color: #f7f1e3;
     cursor:pointer;
     font-weight: 700;
