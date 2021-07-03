@@ -309,9 +309,20 @@ body{
         padding-top: 10px;
     }
 
-    .search-container__input,.search-container__img{
-        /* display: none; */
-    }
+    /* .navbar-button{
+        display: none;
+    } */
+
+    /* .items-container{
+        width: 100%;
+
+    } */
+
+    /* .search-container__input{
+        box-sizing: border-box;
+        width: 100%;
+        height: 40px;
+    } */
 
     .text-temp{
         font-size: 40px;
@@ -323,4 +334,21 @@ body{
     }
     
 
+}
+
+@media (max-width: 600px) {
+    .navbar-button{
+        display: none;
+    }
+
+    .items-container{
+        width: 100%;
+
+    }
+
+    .search-container__input{
+        box-sizing: border-box;
+        width: 100%;
+        height: 40px;
+    }
 }
