@@ -167,7 +167,7 @@ const checkLastSearch = async () => {
 };
 
 //[EVENTS]
-txtSearch.addEventListener('keyup', debounce(getCities, 300));
+txtSearch.addEventListener('keyup', debounce(getCities, 500));
 
 btnRefresh.addEventListener('click', throttle(checkLastSearch, 1000));
 
