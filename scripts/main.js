@@ -38,13 +38,14 @@ const getCities = async event => {
     return;
   };
 
+  await clearItemsResultList();
   hideResultList();
 };
 
 const getCityInfo = async woeid => {
   try {
     handleLoader('set');
-
+    clearItemsResultList();
     hideResultList();
     const objCityInfo = await apiWeather.getCityInfo(woeid);
 
@@ -73,11 +74,12 @@ const displayResultsList = async citiesArray => {
 };
 
 const displayCityData = async objCityInfo => {
-  lblCity.textContent = objCityInfo.title;
-  lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   const days = objCityInfo.consolidated_weather;
   const [firstday] = days;
 
+  txtSearch.value = '';
+  lblCity.textContent = objCityInfo.title;
+  lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   lblTemp.textContent = `${ firstday.the_temp.toFixed(2) }°C`;
   lblForecast.textContent = firstday.weather_state_name;
   imgForecast.src = `${ BASEURLMETA }/static/img/weather/${ firstday.weather_state_abbr }.svg`;
@@ -87,6 +89,7 @@ const displayCityData = async objCityInfo => {
   lblHigh.textContent = `${ firstday.max_temp.toFixed(2) }°C`;
   lblLow.textContent = `${ firstday.min_temp.toFixed(2) }°C`;
   lblRain.textContent = `${ firstday.predictability }%`;
+  txtSearch.blur();
 
   while(cardsContainer.firstChild) cardsContainer.removeChild(cardsContainer.firstChild);
   await displayNextFiveDays(days);
@@ -140,12 +143,6 @@ const createItemResult = city => {
   itemsFoundContainer.appendChild(li);
 };
 
-const hideResultList = async () => {
-  await clearItemsResultList();
-  txtSearch.value = '';
-  itemsFoundContainer.classList.add('d-none');
-};
-
 const clearItemsResultList = async () => {
   while(itemsFoundContainer.firstChild) {
     itemsFoundContainer.removeChild(itemsFoundContainer.firstChild);
@@ -168,22 +165,26 @@ const checkLastSearch = async () => {
   }
 };
 
+const handleDisplayResult = event => {
+  const targetClasses = Array.from(event.target.classList); 
+  if (!containClasses(targetClasses, VALIDCLASSES)) { hideResultList(); };
+};
+
+const hideResultList = () => itemsFoundContainer.classList.add('d-none');
+
+const showResultList = () => itemsFoundContainer.classList.remove('d-none');
+
 //[EVENTS]
 txtSearch.addEventListener('keyup', debounce(getCities, 500));
 
 btnRefresh.addEventListener('click', throttle(checkLastSearch, 1000));
 
-txtSearch.addEventListener('mouseover', () => {
-  itemsFoundContainer.classList.remove('d-none');
-});
+txtSearch.addEventListener('mouseover',showResultList);
 
-document.addEventListener('click', (event) => {  
-  const targetClasses = Array.from(event.target.classList); 
+txtSearch.addEventListener('focus',showResultList);
 
-  if (!containClasses(targetClasses, VALIDCLASSES)) { 
-    itemsFoundContainer.classList.add('d-none');
-  };
-})
+document.addEventListener('click', handleDisplayResult);
+
 
 //[SETTINGS]
 checkLastSearch();
