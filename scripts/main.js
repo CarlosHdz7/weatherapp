@@ -46,6 +46,9 @@ const getCityInfo = async woeid => {
 
     hideResultList();
     const objCityInfo = await apiWeather.getCityInfo(woeid);
+
+    console.log(objCityInfo);
+
     storage.save('woeid', woeid);
     await displayCityData(objCityInfo);
 
@@ -170,6 +173,16 @@ const checkLastSearch = async () => {
 txtSearch.addEventListener('keyup', debounce(getCities, 500));
 
 btnRefresh.addEventListener('click', throttle(checkLastSearch, 1000));
+
+txtSearch.addEventListener('mouseover', () => {
+  itemsFoundContainer.classList.remove('d-none');
+});
+
+document.addEventListener('click', (event) => {
+  if(!event.target.classList.contains('item-inner')  && !event.target.classList.contains('search-container__input') && !event.target.classList.contains('items-found') && !event.target.classList.contains('item')){
+    itemsFoundContainer.classList.add('d-none');
+  }
+})
 
 //[SETTINGS]
 checkLastSearch();
