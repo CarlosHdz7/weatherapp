@@ -291,12 +291,26 @@ body{
     margin-bottom: 30px;
 }
 
+.mt-1{
+    margin-top: 10px; 
+}
+.mt-2{
+    margin-top: 20px; 
+}
+.mt-3{
+    margin-top: 30px;
+}
+
 .no-margin{
     margin: 0px;
 }
 
 .d-none{
     display: none;
+}
+
+.text-center{
+    text-align: center;
 }
 
 @media (max-width: 800px) {
