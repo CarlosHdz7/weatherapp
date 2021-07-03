@@ -62,17 +62,17 @@ const selectCity = async woeid => {
     handleLoader('set');
 
     clearResults();
-    const objCityInfo = await apiWeather.getInfo(woeid);
+    const objCityInfo = await apiWeather.getCityInfo(woeid);
     storage.save('woeid', woeid);
-    await setCityinfo(objCityInfo);
+    await displayCityData(objCityInfo);
 
-    handleLoader('remove');
+    handleLoader('remove');3
   } catch (error) {
-    showErrorMessage('getInfo','A problem has ocurred when trying to fetch city info.');
+    showErrorMessage('getCityInfo','A problem has ocurred when trying to fetch city info.');
   }
 };
 
-const setCityinfo = async objCityInfo => {
+const displayCityData = async objCityInfo => {
   lblCity.textContent = objCityInfo.title;
   lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   const days = objCityInfo.consolidated_weather;
@@ -89,10 +89,10 @@ const setCityinfo = async objCityInfo => {
   lblRain.textContent = `${ firstday.predictability }%`;
 
   while(cardsContainer.firstChild) cardsContainer.removeChild(cardsContainer.firstChild);
-  await setNexFiveDays(days);
+  await displayNextFiveDays(days);
 };
 
-const setNexFiveDays = async days => {
+const displayNextFiveDays = async days => {
   for(let i = 1; i < days.length; i++){
     createDayCard(days[i]);
   }
@@ -144,7 +144,7 @@ const clearResults = () => {
   itemsFoundContainer.classList.add('d-none');
 };
 
-const checkLocalStorage = async () => {
+const checkLastSearch = async () => {
   try {
     const WOEID = await storage.read('woeid');
   
@@ -163,7 +163,7 @@ const checkLocalStorage = async () => {
 //[EVENTS]
 txtSearch.addEventListener('keyup', debounce(getCities, 300));
 
-btnRefresh.addEventListener('click', throttle(checkLocalStorage, 1000));
+btnRefresh.addEventListener('click', throttle(checkLastSearch, 1000));
 
 //[SETTINGS]
-checkLocalStorage();
+checkLastSearch();

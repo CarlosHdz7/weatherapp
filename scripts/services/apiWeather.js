@@ -15,7 +15,7 @@ export default class ApiWeather {
     return JSON.parse(data.contents);
   };
 
-  async getInfo(woeid) {
+  async getCityInfo(woeid) {
     const response = await fetch(`${ this.urlWorkAround }${ encodeURIComponent(`https://www.metaweather.com/api/location/${woeid}/`) }`);
     if (!response.ok) {   
       const message = `An error has occured: ${response.status}`;    
