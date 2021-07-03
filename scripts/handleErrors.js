@@ -1,24 +1,21 @@
-const showErrorMessage = (type, message = 'A problem has ocurred.') => {
+const displayError = (type, message = 'A problem has ocurred.') => {
   if (type === 'search') {
     inputImg.src = 'img/search.png';
     errorMessage.textContent = message;
     loader.style.display = 'none';
   }
 
-  if (type === 'getInfo') {
+  if (type === 'getCityInfo') {
     imgLoader.src = './img/close.png';
     loader.style.display = 'flex';
     textLoader.textContent = message;
   }
 }
 
-const clearErrorMessage = (type) => {
-  if(type === 'search'){
-    errorMessage.textContent = '';
-  }
-}
+const clearSearchError = () => errorMessage.textContent = '';
+
 
 export {
-  showErrorMessage,
-  clearErrorMessage
+  displayError,
+  clearSearchError
 }

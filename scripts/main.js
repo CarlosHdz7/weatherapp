@@ -1,6 +1,6 @@
 'Use strict'
 import './htmlElements.js';
-import { clearErrorMessage, showErrorMessage } from './handleErrors.js';
+import { clearSearchError, displayError } from './handleErrors.js';
 import { handleLoader } from './utilities.js';
 import { debounce, throttle } from './algorithms.js';
 import ApiWeather from './services/apiWeather.js';
@@ -24,14 +24,14 @@ const getCities = async event => {
       inputImg.src = 'img/search.png';
 
       await displayResultsList(cities);
-      clearErrorMessage('search');
+      clearSearchError();
 
       if (event.keyCode === 13 && cities.length) {
         getCityInfo(cities[0].woeid); 
       }     
       
     } catch (error) {
-      showErrorMessage('search','There was a problem loading the cities.')
+      displayError('search', error.message);
     }
 
     return;
@@ -51,7 +51,7 @@ const getCityInfo = async woeid => {
 
     handleLoader('remove');
   } catch (error) {
-    showErrorMessage('getCityInfo','A problem has ocurred when trying to fetch city info.');
+    displayError('getCityInfo',error.message);
   }
 };
 
