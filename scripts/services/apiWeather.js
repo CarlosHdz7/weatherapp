@@ -1,11 +1,11 @@
 export default class ApiWeather {
   constructor() {
-    this.urlWorkAround = "https://api.allorigins.win/get?url=";
-    this.baseUrlMeta = "https://www.metaweather.com";
+    this.urlWorkAround = 'https://api.allorigins.win/get?url=';
+    this.baseUrlMeta = 'https://www.metaweather.com';
   }
 
   async getCities(city) {
-    const ERRORMESSAGE = "An error has occurred while searching for cities.";
+    const ERRORMESSAGE = 'An error has occurred while searching for cities.';
 
     const response = await fetch(
       `${this.urlWorkAround}${encodeURIComponent(`${this.baseUrlMeta}/api/location/search/?query=${city}`)}`
@@ -24,7 +24,7 @@ export default class ApiWeather {
 
   async getCityInfo(woeid) {
     const ERRORMESSAGE =
-      "An error has occurred while trying to load the information.";
+      'An error has occurred while trying to load the information.';
 
     const response = await fetch(
       `${this.urlWorkAround}${encodeURIComponent(`${this.baseUrlMeta}/api/location/${woeid}/`)}`
