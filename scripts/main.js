@@ -108,7 +108,7 @@ const createDayCard = day => {
   const span = document.createElement('span');
   const img = document.createElement('img');
   const span2 = document.createElement('span');
-  const text = document.createTextNode(new Date(day.applicable_date).toLocaleString('en-us', { weekday:'long' }));
+  const text = document.createTextNode(new Date(`${day.applicable_date} 00:00`).toLocaleString('en-us', { weekday:'long' }));
   const text2 = document.createTextNode(`${ day.the_temp.toFixed(2) }°C`);
 
   span.appendChild(text);
