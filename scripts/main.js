@@ -52,7 +52,6 @@ const getCityInfo = async woeid => {
     clearItemsResultList();
     hideResultList();
     const objCityInfo = await apiWeather.getCityInfo(woeid);
-
     storage.save('woeid', woeid);
     await displayCityData(objCityInfo);
 
@@ -83,7 +82,6 @@ const displayCityData = async objCityInfo => {
   const days = objCityInfo.consolidated_weather;
   const [firstday] = days;
 
-  txtSearch.value = '';
   lblCity.textContent = objCityInfo.title;
   lblDate.textContent = new Date(objCityInfo.time).toLocaleString('en-US');
   lblTemp.textContent = `${firstday.the_temp.toFixed(2)}°C`;
@@ -154,6 +152,7 @@ const createItemResult = city => {
     span.classList.add('item-inner--selectable');
     span.setAttribute('data-woeid', city.woeid);
     span.addEventListener('click',throttle(event => {
+        txtSearch.value = city.title;
         getCityInfo(event.target.dataset.woeid);
       }, 1000)
     );
