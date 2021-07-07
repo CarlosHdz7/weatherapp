@@ -32,6 +32,7 @@ const getCities = async event => {
       clearSearchError();
 
       if (event.keyCode === 13 && cities.length) {
+        txtSearch.value = cities[0].title;
         getCityInfo(cities[0].woeid);
       }
     } catch (error) {
@@ -182,6 +183,7 @@ const checkLastSearch = async () => {
   } catch (error) {
     getCityInfo(DEFAULTWOEID);
   }
+  clearSearchError();
 };
 
 const handleDisplayResult = event => {

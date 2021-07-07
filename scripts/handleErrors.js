@@ -2,6 +2,7 @@ const displayError = (type, message = 'A problem has ocurred.') => {
   if (type === 'search') {
     inputImg.src = 'img/search.png';
     errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
     loader.style.display = 'none';
   }
 
@@ -12,7 +13,10 @@ const displayError = (type, message = 'A problem has ocurred.') => {
   }
 }
 
-const clearSearchError = () => errorMessage.textContent = '';
+const clearSearchError = () => {
+  errorMessage.style.display = 'none';
+  errorMessage.textContent = '';
+}
 
 
 export {

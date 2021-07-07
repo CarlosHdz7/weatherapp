@@ -3,6 +3,7 @@
     --black:#222831;
     --black2:#161A20;
     --green:#99FF96;
+    --red: #ee5253;
     --radius:10px;
 }
 
@@ -313,6 +314,15 @@ body{
 
 .text-center{
     text-align: center;
+}
+
+.error-message{
+    background-color: var(--red);
+    color:var(--white);
+    padding: 4px;
+    border-radius:var(--radius);
+    text-align: center;
+    display: none;
 }
 
 @media (max-width: 800px) {
